@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-#define TILESIZE 10
+#define TILESIZE 12
 #define WIDTH 50
 #define HEIGHT 50
 
 SDL_Color grid[WIDTH][HEIGHT];
+
+const SDL_Color NONE = {255,255,255,255};
+const SDL_Color WALL = {0,0,0,255};
+const SDL_Color START = {50,255,50,255};
 
 bool gameRunning = true;
 
@@ -26,23 +30,12 @@ int main(int argc, char *argv[])
 	}
 	
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    
-	/*SDL_Rect rec;
 	
-	rec.x = 10;
-	rec.y = 20;
-	rec.w = TILESIZE;
-	rec.h = TILESIZE;
-		
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &rec);
- 
-    SDL_RenderPresent(renderer);
-	SDL_UpdateWindowSurface(window);
-	
-	SDL_Delay(50000);*/
-	
-	grid[0][0].r = 255;
+	for (int x = 0; x  < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+	        grid[x][y] = NONE;
+        }
+	}
 	
 	while (gameRunning) {
         SDL_Event event;
@@ -58,7 +51,7 @@ int main(int argc, char *argv[])
      	    for (int y = 0; y < HEIGHT; y++) {
      	        SDL_Color color = grid[x][y];
      	        
-     	        SDL_Rect tile = {x*TILESIZE,y*TILESIZE,TILESIZE,TILESIZE};
+     	        SDL_Rect tile = {x*TILESIZE+1,y*TILESIZE+1,TILESIZE-1,TILESIZE-1};
      	        
      	        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
      	        SDL_RenderFillRect(renderer, &tile);
