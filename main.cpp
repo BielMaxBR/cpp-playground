@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #define TILESIZE 12
 #define WIDTH 50
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 	    while (SDL_PollEvent(&event))    {
         	switch (event.type) {
         	    case SDL_QUIT:    {
-          		gameRunning = false;
+              		gameRunning = false;
           		break;
         	    }
         	}
@@ -70,9 +70,9 @@ int main(int argc, char *argv[])
      	}
      	
      	SDL_RenderPresent(renderer);
-	     SDL_UpdateWindowSurface(window);
+        SDL_UpdateWindowSurface(window);
 	     
-	     SDL_Delay(16);
+	    SDL_Delay(16);
      	    
  	}
 	
