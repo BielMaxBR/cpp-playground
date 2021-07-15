@@ -1,1 +1,1 @@
-emcc main.cpp -o index.html -s USE_SDL=2
+emcc src/main.cpp src/window.cpp -I include -Wextra -o build/index.html -s USE_SDL=2
