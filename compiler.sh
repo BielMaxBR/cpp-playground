@@ -1,0 +1,1 @@
+emcc main.cpp -o index.html -s USE_SDL=2
