@@ -13,10 +13,13 @@ Window window;
 
 SDL_Color grid[WIDTH][HEIGHT];
 
-const SDL_Color NONE = {255,255,255,255};
-const SDL_Color WALL = {0,0,0,255};
-const SDL_Color START = {50,255,50,255};
-const SDL_Color END = {255,50,50,255};
+const SDL_Color NONE = {255, 255, 255, 255};
+const SDL_Color WALL = {0, 0, 0, 255};
+const SDL_Color START = {50, 255, 50, 255};
+const SDL_Color END = {255, 50, 50, 255};
+const SDL_Color OPEN = {50, 252, 249, 255};
+const SDL_Color CLOSED = {50, 138, 252, 255};
+const SDL_Color PATH = {50, 252, 138, 255;
 
 
 bool gameRunning = true;
@@ -54,7 +57,7 @@ int main(int argc, char *argv[])
 	}
 	
 	window.create("SDL2 playground", 600, 600);
-
+    printf("janela criada");
 	for (int x = 0; x  < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
              if(x==y) {
