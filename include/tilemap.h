@@ -1,10 +1,10 @@
 #pragma once
 
+#include <tile.h>
 
 class Tilemap {
     private:
-        int grid[][];
+        Tile grid[][];
     public:
         Tilemap(int width, int height);
-        createGrid(int rows, int columns);
 };
