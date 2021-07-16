@@ -1,2 +1,5 @@
 image:
   file: .gitpod.Dockerfile
+tasks:
+  - init: cd emsdk 
+    command: ./emsdk install latest && ./emsdk activate latest && source ./emsdk_env.sh
