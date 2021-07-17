@@ -4,6 +4,9 @@
 #include <emscripten/html5.h>
 
 #include <window.h>
+#include <tilemap.h>
+#include <tile.h>
+#include <vector2.h>
 
 #define TILESIZE 12
 #define WIDTH 50
@@ -11,7 +14,8 @@
 
 Window window;
 
-SDL_Color grid[WIDTH][HEIGHT];
+Tilemap tilemap(WIDTH, HEIGHT);
+
 
 const SDL_Color NONE = {255, 255, 255, 255};
 const SDL_Color WALL = {0, 0, 0, 255};
@@ -19,7 +23,7 @@ const SDL_Color START = {50, 255, 50, 255};
 const SDL_Color END = {255, 50, 50, 255};
 const SDL_Color OPEN = {50, 252, 249, 255};
 const SDL_Color CLOSED = {50, 138, 252, 255};
-const SDL_Color PATH = {50, 252, 138, 255;
+const SDL_Color PATH = {50, 252, 138, 255};
 
 
 bool gameRunning = true;
@@ -38,7 +42,9 @@ void gameLoop() {
     
     for (int x = 0; x  < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
-            SDL_Color color = grid[x][y];
+            Tile tile = tilemap.getTile(x, y);
+
+            SDL_Color color = tile.color;
             
             window.renderTile(x, y, TILESIZE, color);
         }
@@ -58,20 +64,7 @@ int main(int argc, char *argv[])
 	
 	window.create("SDL2 playground", 600, 600);
     printf("janela criada");
-	for (int x = 0; x  < WIDTH; x++) {
-        for (int y = 0; y < HEIGHT; y++) {
-             if(x==y) {
-                 grid[x][y] = WALL;
-            } else {
-	            grid[x][y] = NONE;
-	        }
-        
-        }
-	}
-	
-	grid[0][0] = START;
-	grid[WIDTH-1][HEIGHT-1] = END;
-	
+
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
 	#else

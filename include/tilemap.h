@@ -1,10 +1,12 @@
 #pragma once
 
 #include <tile.h>
+#include <vector>
 
 class Tilemap {
     private:
-        Tile grid[][];
+        std::vector<std::vector<Tile>> grid;
     public:
-        Tilemap(int width, int height);
+        Tilemap(int64_t width, int64_t height);
+        Tile getTile(int64_t x, int64_t y);
 };

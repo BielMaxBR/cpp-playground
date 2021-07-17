@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL.h>
+
 #include <vector2.h>
 
 class Tile {
@@ -7,12 +9,15 @@ class Tile {
         float G;
         float H;
         float F;
-        Vector2 neighbors[4];
-        Vector2 parent;
-        Vector2 position;
-    
+        Vector2 *neighbors[4];
+        Vector2 *parent;
+        Vector2 position;    
     public: 
-        Tile(Vector2 position_p, Vector2 parent_p);
-        calcH(Vector2 finish);
-        calcF();
-}
+        SDL_Color color = {255, 255, 255, 255};
+
+        Tile();
+        Tile(Vector2 position_p);
+        
+        float calcH(Vector2 finish);
+        float calcF();
+};
