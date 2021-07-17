@@ -1,18 +1,25 @@
+#include <cstdint>
+#include <vector>
+#include <iostream>
+
 #include <tile.h>
 #include <tilemap.h>
 #include <vector2.h>
 
-Tilemap::Tilemap(int64_t width, int64_t height) {
-    for(int64_t x = 0; x < width; x++) {
-        for(int64_t y = 0; y < height; y++) {
+Tilemap::Tilemap(uint64_t width, uint64_t height) {
+    grid.reserve(width * 2);
+    for (size_t x = 0; x < width * 2; x++) {
 
-            Vector2 vector(x, y);
-             
-            grid[x][y] = Tile(vector);
+        grid.push_back(std::vector<Tile>());
+        grid[x].reserve(height * 2);
+
+        for (size_t y = 0; y < height * 2; y++) {
+
+            grid[x].push_back(Tile(x, y));
         }
     }
 }
 
-Tile Tilemap::getTile(int64_t x, int64_t y) {
+Tile Tilemap::getTile(uint64_t x, uint64_t y) {
     return grid[x][y];
 }

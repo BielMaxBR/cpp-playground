@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cstdint>
 #include <SDL.h>
 #include <emscripten.h>
 #include <emscripten/html5.h>
@@ -40,8 +41,9 @@ void gameLoop() {
     }
     window.clear();
     
-    for (int x = 0; x  < WIDTH; x++) {
-        for (int y = 0; y < HEIGHT; y++) {
+    
+    for (uint64_t x = 0; x  < WIDTH; x++) {
+        for (uint64_t y = 0; y < HEIGHT; y++) {
             Tile tile = tilemap.getTile(x, y);
 
             SDL_Color color = tile.color;
@@ -49,6 +51,7 @@ void gameLoop() {
             window.renderTile(x, y, TILESIZE, color);
         }
     }
+    
     
     window.display();
 	     
@@ -64,6 +67,8 @@ int main(int argc, char *argv[])
 	
 	window.create("SDL2 playground", 600, 600);
     printf("janela criada");
+
+   
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);

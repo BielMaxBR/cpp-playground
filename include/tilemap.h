@@ -1,12 +1,14 @@
 #pragma once
 
-#include <tile.h>
 #include <vector>
+#include <cstdint>
+
+#include <tile.h>
 
 class Tilemap {
     private:
         std::vector<std::vector<Tile>> grid;
     public:
-        Tilemap(int64_t width, int64_t height);
-        Tile getTile(int64_t x, int64_t y);
+        Tilemap(uint64_t width, uint64_t height);
+        Tile getTile(uint64_t x, uint64_t y);
 };

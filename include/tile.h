@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <cstdint>
 
 #include <vector2.h>
 
@@ -17,7 +18,8 @@ class Tile {
 
         Tile();
         Tile(Vector2 position_p);
-        
+        Tile(uint64_t x, uint64_t y);
+
         float calcH(Vector2 finish);
         float calcF();
 };
