@@ -8,6 +8,7 @@
 #include <tilemap.h>
 #include <tile.h>
 #include <vector2.h>
+#include <pathfinder.h>
 
 #define TILESIZE 12
 #define WIDTH 50
@@ -68,7 +69,7 @@ int main(int argc, char *argv[])
 	window.create("SDL2 playground", 600, 600);
     printf("janela criada");
 
-   
+   Pathfinder finder(tilemap.getTile(0, 0), tilemap.getTile(WIDTH, HEIGHT));
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
