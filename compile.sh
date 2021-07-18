@@ -1,1 +1,0 @@
-emcc src/main.cpp src/window.cpp src/tilemap.cpp src/tile.cpp src/vector2.cpp -I include -Wextra -o build/index.html -s USE_SDL=2

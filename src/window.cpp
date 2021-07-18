@@ -21,12 +21,12 @@ void Window::create(const char* p_title, int p_w, int p_h) {
 
 
 void Window::clear() {
-	SDL_SetRenderDrawColor(renderer, 90, 90, 90, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 }
 
 void Window::renderTile(int x, int y, int tilesize, SDL_Color color) {
-    SDL_Rect tile = {x*tilesize+1,y*tilesize+1,tilesize-1,tilesize-1};
+    SDL_Rect tile = {x*tilesize+1,y*tilesize+1,tilesize-2,tilesize-2};
             
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
     SDL_RenderFillRect(renderer, &tile);
