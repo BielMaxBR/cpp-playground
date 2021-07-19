@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <cstdint>
 #include <SDL.h>
+#include <vector>
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
@@ -67,7 +68,9 @@ int main(int argc, char *argv[])
 	}
 	
 	window.create("SDL2 playground", 600, 600);
-    printf("janela criada");
+    SDL_Log("janela criada");
+
+
 
     Pathfinder finder(tilemap.getTile(0, 0), tilemap.getTile(WIDTH, HEIGHT));
 
