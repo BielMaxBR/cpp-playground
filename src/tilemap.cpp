@@ -24,3 +24,15 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
 Tile Tilemap::getTile(uint64_t x, uint64_t y) {
     return grid[x][y];
 }
+Tile Tilemap::getTile(Vector2 position) {
+    return grid[position.x][position.y];
+}
+
+void Tilemap::setColor(Vector2 position, SDL_Color color) {
+    grid[position.x][position.y].color = color;
+
+    SDL_Log("%i",getTile(position.x,position.y).color.r);
+    SDL_Log("%i",getTile(position.x,position.y).color.g);
+    SDL_Log("%i",getTile(position.x,position.y).color.b);
+    SDL_Log("///");
+}

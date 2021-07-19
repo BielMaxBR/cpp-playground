@@ -10,6 +10,7 @@
 #include <tile.h>
 #include <vector2.h>
 #include <pathfinder.h>
+#include <constants.h>
 
 #define TILESIZE 12
 #define WIDTH 50
@@ -18,16 +19,6 @@
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
-
-
-const SDL_Color NONE = {255, 255, 255, 255};
-const SDL_Color WALL = {0, 0, 0, 255};
-const SDL_Color START = {50, 255, 50, 255};
-const SDL_Color END = {255, 50, 50, 255};
-const SDL_Color OPEN = {50, 252, 249, 255};
-const SDL_Color CLOSED = {50, 138, 252, 255};
-const SDL_Color PATH = {50, 252, 138, 255};
-
 
 bool gameRunning = true;
 
@@ -48,9 +39,7 @@ void gameLoop() {
         for (uint64_t y = 0; y < HEIGHT; y++) {
             Tile tile = tilemap.getTile(x, y);
 
-            SDL_Color color = tile.color;
-            
-            window.renderTile(x, y, TILESIZE, color);
+            window.renderTile(x, y, TILESIZE, tile.color);
         }
     }
     
@@ -70,9 +59,7 @@ int main(int argc, char *argv[])
 	window.create("SDL2 playground", 600, 600);
     SDL_Log("janela criada");
 
-
-
-    Pathfinder finder(tilemap.getTile(0, 0), tilemap.getTile(WIDTH, HEIGHT));
+    Pathfinder finder(tilemap,Vector2(0,0), Vector2(WIDTH-1, HEIGHT-1));
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);

@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <tile.h>
+#include <tilemap.h>
 
 class Pathfinder {
     private:
@@ -11,5 +12,5 @@ class Pathfinder {
         Tile start;
         Tile end;
     public:
-        Pathfinder(Tile start_p, Tile end_p);
+        Pathfinder(Tilemap tilemap, Vector2 start_p, Vector2 end_p);
 };
