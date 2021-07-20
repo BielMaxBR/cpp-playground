@@ -15,8 +15,22 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
         grid[x].reserve(height);
 
         for (size_t y = 0; y < height; y++) {
+            Tile newTile(x, y);
 
-            grid[x].push_back(Tile(x, y));
+            if(x > 0) {
+                newTile.addNeighbor(Vector2(-1, 0));
+            }
+            if(x < width-1) {
+                newTile.addNeighbor(Vector2(1, 0));
+            }
+            if(y > 0) {
+                newTile.addNeighbor(Vector2(0, 1));
+            }
+            if(y < height-1) {
+                newTile.addNeighbor(Vector2(0, -1));
+            }
+
+            grid[x].push_back(newTile);
         }
     }
 }
@@ -29,5 +43,5 @@ Tile Tilemap::getTile(Vector2 position) {
 }
 
 void Tilemap::setColor(Vector2 position, SDL_Color color) {
-    grid[position.x][position.y].color = color;
+    grid[position.x][position.y].setColor(color);
 }

@@ -33,8 +33,14 @@ void gameLoop() {
             }
         }
     }
+
+    //if (finder.isRunning()) {
+        //SDL_Log("%i",finder.isRunning());
+        //finder.update(tilemap);
+    //}
+
+
     window.clear();
-    
     
     for (uint64_t x = 0; x  < WIDTH; x++) {
         for (uint64_t y = 0; y < HEIGHT; y++) {
@@ -59,6 +65,8 @@ int main(int argc, char *argv[])
 	
 	window.create("SDL2 playground", 600, 600);
     SDL_Log("janela criada");
+
+    finder.startFind();
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
