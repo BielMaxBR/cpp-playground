@@ -12,5 +12,5 @@ class Pathfinder {
         Tile start;
         Tile end;
     public:
-        Pathfinder(Tilemap tilemap, Vector2 start_p, Vector2 end_p);
+        Pathfinder(Tilemap *tilemap, Vector2 start_p, Vector2 end_p);
 };

@@ -30,9 +30,4 @@ Tile Tilemap::getTile(Vector2 position) {
 
 void Tilemap::setColor(Vector2 position, SDL_Color color) {
     grid[position.x][position.y].color = color;
-
-    SDL_Log("%i",getTile(position.x,position.y).color.r);
-    SDL_Log("%i",getTile(position.x,position.y).color.g);
-    SDL_Log("%i",getTile(position.x,position.y).color.b);
-    SDL_Log("///");
 }

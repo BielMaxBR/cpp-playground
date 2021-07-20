@@ -19,6 +19,7 @@
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
+Pathfinder finder(&tilemap,Vector2(0,0), Vector2(WIDTH-1, HEIGHT-1));
 
 bool gameRunning = true;
 
@@ -58,8 +59,6 @@ int main(int argc, char *argv[])
 	
 	window.create("SDL2 playground", 600, 600);
     SDL_Log("janela criada");
-
-    Pathfinder finder(tilemap,Vector2(0,0), Vector2(WIDTH-1, HEIGHT-1));
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
