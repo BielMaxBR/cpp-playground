@@ -18,16 +18,16 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
             Tile newTile(x, y);
 
             if(x > 0) {
-                newTile.addNeighbor(Vector2(-1, 0));
+                newTile.addNeighbor(newTile.position.add(Vector2(-1, 0)));
             }
             if(x < width-1) {
-                newTile.addNeighbor(Vector2(1, 0));
+                newTile.addNeighbor(newTile.position.add(Vector2(1, 0)));
             }
             if(y > 0) {
-                newTile.addNeighbor(Vector2(0, 1));
+                newTile.addNeighbor(newTile.position.add(Vector2(0, -1)));
             }
             if(y < height-1) {
-                newTile.addNeighbor(Vector2(0, -1));
+                newTile.addNeighbor(newTile.position.add(Vector2(0, 1)));
             }
 
             grid[x].push_back(newTile);

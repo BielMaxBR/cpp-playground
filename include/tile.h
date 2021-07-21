@@ -12,9 +12,9 @@ class Tile {
         float H;
         float F;
         Vector2 *parent;
-        Vector2 position;    
         
     public: 
+        Vector2 position;    
         std::vector<Vector2> neighbors;
         SDL_Color color = {255, 255, 255, 255};
 

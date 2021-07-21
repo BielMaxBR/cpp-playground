@@ -20,5 +20,5 @@ class Pathfinder {
 
         void addClosed(Tile tile);
 
-        void update(Tilemap tilemap);
+        void update(Tilemap *tilemap);
 };

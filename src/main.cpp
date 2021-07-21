@@ -34,12 +34,6 @@ void gameLoop() {
         }
     }
 
-    //if (finder.isRunning()) {
-        //SDL_Log("%i",finder.isRunning());
-        //finder.update(tilemap);
-    //}
-
-
     window.clear();
     
     for (uint64_t x = 0; x  < WIDTH; x++) {
@@ -67,6 +61,11 @@ int main(int argc, char *argv[])
     SDL_Log("janela criada");
 
     finder.startFind();
+
+    if (finder.isRunning()) {
+        SDL_Log("running status: %i",finder.isRunning());
+        finder.update(&tilemap);
+    }
 
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
