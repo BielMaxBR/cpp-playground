@@ -38,9 +38,9 @@ void gameLoop() {
     
     for (uint64_t x = 0; x  < WIDTH; x++) {
         for (uint64_t y = 0; y < HEIGHT; y++) {
-            //Tile tile = *tilemap.getTile(x, y);
+            Tile tile = *tilemap.getTile(x, y);
 
-            //window.renderTile(x, y, TILESIZE, tile.getColor());
+            window.renderTile(x, y, TILESIZE, tile.getColor());
         }
     }
     

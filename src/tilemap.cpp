@@ -15,22 +15,22 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
         grid[x].reserve(height);
 
         for (size_t y = 0; y < height; y++) {
-            Tile newTile(x, y);
+            Tile* newTile = new Tile(x, y);
 
             if(x > 0) {
-                newTile.addNeighbor(newTile.position.add(Vector2(-1, 0)));
+                newTile->addNeighbor(newTile->position.add(Vector2(-1, 0)));
             }
             if(x < width-1) {
-                newTile.addNeighbor(newTile.position.add(Vector2(1, 0)));
+                newTile->addNeighbor(newTile->position.add(Vector2(1, 0)));
             }
             if(y > 0) {
-                newTile.addNeighbor(newTile.position.add(Vector2(0, -1)));
+                newTile->addNeighbor(newTile->position.add(Vector2(0, -1)));
             }
             if(y < height-1) {
-                newTile.addNeighbor(newTile.position.add(Vector2(0, 1)));
+                newTile->addNeighbor(newTile->position.add(Vector2(0, 1)));
             }
 
-            grid[x].push_back(&newTile);
+            grid[x].push_back(newTile);
         }
     }
 }
