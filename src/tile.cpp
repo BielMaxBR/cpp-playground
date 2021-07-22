@@ -19,6 +19,10 @@ Tile::Tile(uint64_t x, uint64_t y) : position(x, y){
 void Tile::setColor(SDL_Color color_p) {
     color = color_p;
 };
+SDL_Color Tile::getColor() {
+    return color;
+};
+
 
 void Tile::addNeighbor(Vector2 neighbor) {
     neighbors.push_back(neighbor);

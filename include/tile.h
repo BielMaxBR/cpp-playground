@@ -23,6 +23,7 @@ class Tile {
         Tile(uint64_t x, uint64_t y);
 
         void setColor(SDL_Color color_p);
+        SDL_Color getColor();
 
         void addNeighbor(Vector2 neighbor);
         Vector2 getNeighbor(int index);
