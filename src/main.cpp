@@ -60,9 +60,9 @@ int main(int argc, char *argv[])
 	window.create("SDL2 playground", 600, 600);
     SDL_Log("janela criada");
 
-    //finder.startFind();
+    finder.startFind();
+    finder.update(&tilemap);
 
-    SDL_Log("tile 0 %llu %llu",tilemap.getTile(0,0)->position.x,tilemap.getTile(0,0)->position.y);
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
 	#else

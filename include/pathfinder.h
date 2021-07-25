@@ -19,6 +19,9 @@ class Pathfinder {
         bool isRunning();
 
         void addClosed(Tile* tile);
+        void removeClosed(Tile* tile);
+        void addOpen(Tile* tile);
+        void removeOpen(Tile* tile);
 
         void update(Tilemap* tilemap);
 };

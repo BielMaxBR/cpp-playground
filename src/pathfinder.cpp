@@ -1,4 +1,6 @@
 #include <SDL.h>
+#include <stdio.h>
+
 
 #include <pathfinder.h>
 #include <vector2.h>
@@ -28,16 +30,28 @@ void Pathfinder::addClosed(Tile* tile) {
     closedList.push_back(tile);
 };
 
+void Pathfinder::removeClosed(Tile* tile) {
+    closedList.erase(std::remove(closedList.begin(), closedList.end(), tile), closedList.end());
+};
+
+void Pathfinder::addOpen(Tile* tile) {
+    openList.push_back(tile);
+ };
+
+
+void Pathfinder::removeOpen(Tile* tile) {
+    openList.erase(std::remove(openList.begin(), openList.end(), tile), openList.end());
+};
+
 void Pathfinder::update(Tilemap *tilemap) {
 
-    for(unsigned long i = 0; i < closedList.size(); i++) {
-        Tile tile = *closedList[i];
-
-        for(unsigned long j = 0; j < tile.neighbors.size(); j++) {
-            Tile* neighbor = tilemap->getTile(tile.getNeighbor(j));
+    for(unsigned long i = 0; i < openList.size(); i++) {
+        Tile* tile = openList[i];
+        for(unsigned long j = 0; j < tile->neighbors.size(); j++) {
+            Tile* neighbor = tilemap->getTile(tile->getNeighbor(j));
 
             neighbor->setColor(OPEN);
-            //SDL_Log("neighbor pos: %llu %llu",neighbor.position.x, neighbor.position.y);
+            addOpen(neighbor);
         }
     }
     running = false;
