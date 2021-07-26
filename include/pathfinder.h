@@ -18,9 +18,12 @@ class Pathfinder {
         void startFind();
         bool isRunning();
 
+        bool isStartOrEnd(Tile* tile);
+
         void addClosed(Tile* tile);
         void removeClosed(Tile* tile);
         void addOpen(Tile* tile);
+        void addOpen(Tile* tile, int position);
         void removeOpen(Tile* tile);
 
         void update(Tilemap* tilemap);

@@ -4,10 +4,14 @@
 
 class Vector2 {
     public: 
-        uint64_t x;
-        uint64_t y;
-        Vector2(uint64_t x_p, uint64_t y_p);
+        double x;
+        double y;
+        Vector2(double x_p, double y_p);
 
         Vector2 sub(Vector2 vect);
         Vector2 add(Vector2 vect);
+        
+        double distance(Vector2 vect);
+
+        bool compare(Vector2 vect);
 };

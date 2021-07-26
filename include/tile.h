@@ -8,10 +8,10 @@
 
 class Tile {
     private: 
-        float G;
-        float H;
-        float F;
-        Vector2 *parent;
+        double G = 1.0;
+        double H = 0;
+        double F = 0;
+        Tile *parent;
         
     public: 
         Vector2 position;    
@@ -28,6 +28,8 @@ class Tile {
         void addNeighbor(Vector2 neighbor);
         Vector2 getNeighbor(int index);
 
-        float calcH(Vector2 finish);
-        float calcF();
+        double calcH(Vector2 finish);
+        double calcF();
+
+        double getF();
 };

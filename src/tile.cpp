@@ -31,3 +31,16 @@ void Tile::addNeighbor(Vector2 neighbor) {
 Vector2 Tile::getNeighbor(int index) {
     return neighbors[index];
 } 
+
+double Tile::calcH(Vector2 finish) {
+    H = position.distance(finish);
+    return H;
+};
+double Tile::calcF() {
+    F = H + G;
+    return F;
+};
+
+double Tile::getF() {
+    return F;
+};
