@@ -2,10 +2,12 @@
 #include <vector>
 #include <iostream>
 #include <SDL.h>
+#include <stdlib.h>
 
 #include <tile.h>
 #include <tilemap.h>
 #include <vector2.h>
+#include <constants.h>
 
 Tilemap::Tilemap(uint64_t width, uint64_t height) {
     grid.reserve(width);
@@ -16,6 +18,11 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
 
         for (size_t y = 0; y < height; y++) {
             Tile* newTile = new Tile(x, y);
+            
+            if(rand() % 100 <= 5) {
+                newTile->type = "wall";
+                newTile->setColor(WALL);
+            }
 
             if(x > 0) {
                 newTile->addNeighbor(newTile->position.add(Vector2(-1, 0)));

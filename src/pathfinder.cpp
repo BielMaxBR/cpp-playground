@@ -91,7 +91,7 @@ void Pathfinder::update(Tilemap* tilemap) {
     for(unsigned long i = 0; i < current -> neighbors.size(); i++) {
         Tile * neighbor = tilemap -> getTile(current -> getNeighbor(i));
 
-        if (!findInVector(closedList,neighbor) || neighbor->type == "path") {
+        if (!findInVector(closedList,neighbor) && neighbor->type != "wall") {
 
             if(findInVector(openList,neighbor)) {
                 continue;
