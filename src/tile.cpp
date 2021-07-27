@@ -23,6 +23,13 @@ SDL_Color Tile::getColor() {
     return color;
 };
 
+void Tile::addParent(Tile* tile) {
+    parent = tile;
+}
+
+Tile* Tile::getParent() {
+    return parent;
+}
 
 void Tile::addNeighbor(Vector2 neighbor) {
     neighbors.push_back(neighbor);

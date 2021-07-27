@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <cstdint>
 #include <vector>
+#include <string>
 
 #include <vector2.h>
 
@@ -11,9 +12,10 @@ class Tile {
         double G = 1.0;
         double H = 0;
         double F = 0;
-        Tile *parent;
+        Tile* parent;
         
     public: 
+        std::string type = "wall";
         Vector2 position;    
         std::vector<Vector2> neighbors;
         SDL_Color color = {255, 255, 255, 255};
@@ -24,6 +26,9 @@ class Tile {
 
         void setColor(SDL_Color color_p);
         SDL_Color getColor();
+
+        void addParent(Tile* tile);
+        Tile* getParent();
 
         void addNeighbor(Vector2 neighbor);
         Vector2 getNeighbor(int index);

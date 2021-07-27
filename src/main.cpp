@@ -19,7 +19,7 @@
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
-Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 1, HEIGHT - 2));
+Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
 
 bool gameRunning = true;
 
