@@ -3,5 +3,5 @@ image:
 tasks:
   - name: downloading emsdk
     init: git clone https://github.com/emscripten-core/emsdk.git
-  - name: installing emcc
-    command: cd emsdk && ./emsdk install latest && ./emsdk activate latest && source ./emsdk_env.sh
+  - name: emcc
+    init: cd emsdk && ./emsdk install latest && ./emsdk activate latest && source ./emsdk_env.sh
