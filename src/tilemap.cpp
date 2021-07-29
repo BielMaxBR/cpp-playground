@@ -24,9 +24,6 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
             
             if(rand() % 100 <= 30) {
                 newTile->type = TYPE_WALL;
-
-                SDL_Log("%i",newTile->type);
-
                 newTile->setColor(COLOR_WALL);
             }
 

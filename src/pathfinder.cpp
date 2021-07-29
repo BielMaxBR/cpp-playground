@@ -81,6 +81,12 @@ void Pathfinder::reconstructPath(Tile* tile) {
 
 void Pathfinder::update(Tilemap* tilemap) {
 
+    if(openList.size() == 0) {
+        running = false;
+        SDL_Log("caminho impossível");
+        return;
+    }
+
     Tile * current = openList.front();
 
     if (current->position.compare(end->position)) {
