@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <cstdint>
+#include <stdlib.h>
+#include <time.h>
 #include <SDL.h>
 #include <vector>
 #include <emscripten.h>
@@ -60,6 +62,8 @@ int main(int argc, char * argv[]) {
 
     window.create("SDL2 playground", 600, 600);
     SDL_Log("janela criada");
+
+    srand(time(NULL));
 
     finder.startFind();
     

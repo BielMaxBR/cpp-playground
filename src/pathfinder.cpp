@@ -11,8 +11,11 @@ Pathfinder::Pathfinder(Tilemap* tilemap, Vector2 start_p, Vector2 end_p) {
     start = tilemap -> getTile(start_p);
     end = tilemap -> getTile(end_p);
 
-    start -> setColor(START);
-    end -> setColor(END);
+    start-> setColor(COLOR_START);
+    end-> setColor(COLOR_END);
+
+    end->type = TYPE_NONE;
+    start->type = TYPE_NONE;
 };
 
 void Pathfinder::startFind() {
@@ -30,35 +33,35 @@ bool Pathfinder::isStartOrEnd(Tile* tile) {
 
 void Pathfinder::addClosed(Tile* tile) {
     if (!isStartOrEnd(tile)) {
-        tile->setColor(CLOSED);
+        tile->setColor(COLOR_CLOSED);
     }
     closedList.push_back(tile);
 };
 
 void Pathfinder::removeClosed(Tile* tile) {
     if (!isStartOrEnd(tile)) {
-        tile->setColor(NONE);
+        tile->setColor(COLOR_NONE);
     }
     closedList.erase(std::remove(closedList.begin(), closedList.end(), tile), closedList.end());
 };
 
 void Pathfinder::addOpen(Tile* tile) {
     if (!isStartOrEnd(tile)) {
-        tile->setColor(OPEN);
+        tile->setColor(COLOR_OPEN);
     }
     openList.push_back(tile);
 };
 
 void Pathfinder::addOpen(Tile* tile, int position) {
     if (!isStartOrEnd(tile)) {
-        tile->setColor(OPEN);
+        tile->setColor(COLOR_OPEN);
     }
     openList.insert(openList.begin() + position, tile);
 };
 
 void Pathfinder::removeOpen(Tile* tile) {
     if (!isStartOrEnd(tile)) {
-        tile->setColor(NONE);
+        tile->setColor(COLOR_NONE);
     }
     openList.erase(std::remove(openList.begin(), openList.end(), tile), openList.end());
 };
@@ -67,7 +70,7 @@ void Pathfinder::reconstructPath(Tile* tile) {
     Tile* actualTile = tile;
     while (actualTile != start) {
         if (actualTile != end) {
-            actualTile->setColor(PATH);
+            actualTile->setColor(COLOR_PATH);
         }
 
         path.insert(path.begin(),actualTile);
@@ -91,8 +94,8 @@ void Pathfinder::update(Tilemap* tilemap) {
     for(unsigned long i = 0; i < current -> neighbors.size(); i++) {
         Tile * neighbor = tilemap -> getTile(current -> getNeighbor(i));
 
-        if (!findInVector(closedList,neighbor) && neighbor->type != "wall") {
-
+        if (!findInVector(closedList,neighbor) && neighbor->type == TYPE_NONE) {
+            
             if(findInVector(openList,neighbor)) {
                 continue;
             }

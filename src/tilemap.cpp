@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include <tile.h>
 #include <tilemap.h>
@@ -10,6 +11,8 @@
 #include <constants.h>
 
 Tilemap::Tilemap(uint64_t width, uint64_t height) {
+    srand(time(NULL));
+
     grid.reserve(width);
     for (size_t x = 0; x < width; x++) {
 
@@ -19,9 +22,12 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
         for (size_t y = 0; y < height; y++) {
             Tile* newTile = new Tile(x, y);
             
-            if(rand() % 100 <= 5) {
-                newTile->type = "wall";
-                newTile->setColor(WALL);
+            if(rand() % 100 <= 30) {
+                newTile->type = TYPE_WALL;
+
+                SDL_Log("%i",newTile->type);
+
+                newTile->setColor(COLOR_WALL);
             }
 
             if(x > 0) {

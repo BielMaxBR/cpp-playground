@@ -6,6 +6,7 @@
 #include <string>
 
 #include <vector2.h>
+#include <constants.h>
 
 class Tile {
     private: 
@@ -15,7 +16,7 @@ class Tile {
         Tile* parent;
         
     public: 
-        std::string type = "wall";
+        int type = TYPE_NONE;
         Vector2 position;    
         std::vector<Vector2> neighbors;
         SDL_Color color = {255, 255, 255, 255};
