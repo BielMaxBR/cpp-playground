@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include <tile.h>
-#include <tilemap.h>
+#include <tile.hpp>
+#include <tilemap.hpp>
 
 class Pathfinder {
     private:

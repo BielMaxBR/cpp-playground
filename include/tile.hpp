@@ -5,8 +5,8 @@
 #include <vector>
 #include <string>
 
-#include <vector2.h>
-#include <constants.h>
+#include <vector2.hpp>
+#include <constants.hpp>
 
 class Tile {
     private: 

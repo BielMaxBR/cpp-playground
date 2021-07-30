@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "window.h"
+#include "window.hpp"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;

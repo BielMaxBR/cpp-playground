@@ -1,8 +1,8 @@
 #include <SDL.h>
 #include <cstdint>
 
-#include <vector2.h>
-#include <tile.h>
+#include <vector2.hpp>
+#include <tile.hpp>
 
 Tile::Tile() : position(0, 0) {
 

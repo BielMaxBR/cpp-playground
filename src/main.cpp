@@ -7,12 +7,12 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 
-#include <window.h>
-#include <tilemap.h>
-#include <tile.h>
-#include <vector2.h>
-#include <pathfinder.h>
-#include <constants.h>
+#include <window.hpp>
+#include <tilemap.hpp>
+#include <tile.hpp>
+#include <vector2.hpp>
+#include <pathfinder.hpp>
+#include <constants.hpp>
 
 #define TILESIZE 12
 #define WIDTH 50

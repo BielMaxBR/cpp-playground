@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <string>
 
-#include <pathfinder.h>
-#include <vector2.h>
-#include <tilemap.h>
-#include <constants.h>
+#include <pathfinder.hpp>
+#include <vector2.hpp>
+#include <tilemap.hpp>
+#include <constants.hpp>
 
 Pathfinder::Pathfinder(Tilemap* tilemap, Vector2 start_p, Vector2 end_p) {
     start = tilemap -> getTile(start_p);

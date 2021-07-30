@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include <tile.h>
-#include <tilemap.h>
-#include <vector2.h>
-#include <constants.h>
+#include <tile.hpp>
+#include <tilemap.hpp>
+#include <vector2.hpp>
+#include <constants.hpp>
 
 Tilemap::Tilemap(uint64_t width, uint64_t height) {
     srand(time(NULL));

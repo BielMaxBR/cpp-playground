@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <SDL.h>
 
-#include <tile.h>
+#include <tile.hpp>
 
 class Tilemap {
     public:
