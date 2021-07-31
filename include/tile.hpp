@@ -16,10 +16,10 @@ class Tile {
         Tile* parent;
         
     public: 
-        int type = TYPE_NONE;
+        int type = TYPE_WALL;
         Vector2 position;    
         std::vector<Vector2> neighbors;
-        SDL_Color color = {255, 255, 255, 255};
+        SDL_Color color = COLOR_WALL;
 
         Tile();
         Tile(Vector2 position_p);

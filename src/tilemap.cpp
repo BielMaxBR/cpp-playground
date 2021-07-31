@@ -52,5 +52,20 @@ void Tilemap::setColor(Vector2 position, SDL_Color color) {
 }
 
 void Tilemap::generateMap() {
+    std::vector<std::vector<Tile*>> cells;
 
+    cells.reserve(grid.size());
+
+    for(size_t x = 0; x < grid.size(); x+=2) {
+        cells[x].reserve(grid[x].size());
+        
+        for(size_t y = 0; y < grid[x].size(); y+=2) {
+        Tile* cell = getTile(x, y);
+
+        cells[x].push_back(cell);
+
+        cell->setColor(COLOR_NONE);
+        cell->type = TYPE_NONE;
+        }
+    }
 };
