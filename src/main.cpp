@@ -21,7 +21,8 @@
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
-Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
+
+//Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
 
 bool gameRunning = true;
 
@@ -36,9 +37,9 @@ void gameLoop() {
         }
     }
 
-    if (finder.isRunning()) {
-        finder.update(&tilemap);
-    }
+    // if (finder.isRunning()) {
+    //     finder.update(&tilemap);
+    // }
 
     window.clear();
 
@@ -60,12 +61,11 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
-    window.create("SDL2 playground", 600, 600);
+    window.create("SDL2 playground", WIDTH*TILESIZE, WIDTH*TILESIZE);
     SDL_Log("janela criada");
 
-    srand(time(NULL));
-
-    finder.startFind();
+    tilemap.generateMap();
+    //finder.startFind();
     
     #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(gameLoop, 0, 1);

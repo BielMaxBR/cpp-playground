@@ -21,23 +21,18 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
 
         for (size_t y = 0; y < height; y++) {
             Tile* newTile = new Tile(x, y);
-            
-            if(rand() % 100 <= 30) {
-                newTile->type = TYPE_WALL;
-                newTile->setColor(COLOR_WALL);
-            }
 
             if(x > 0) {
-                newTile->addNeighbor(newTile->position.add(Vector2(-1, 0)));
+                newTile->addNeighbor(newTile->position.add(Vector2::LEFT));
             }
             if(x < width-1) {
-                newTile->addNeighbor(newTile->position.add(Vector2(1, 0)));
+                newTile->addNeighbor(newTile->position.add(Vector2::RIGHT));
             }
             if(y > 0) {
-                newTile->addNeighbor(newTile->position.add(Vector2(0, -1)));
+                newTile->addNeighbor(newTile->position.add(Vector2::UP));
             }
             if(y < height-1) {
-                newTile->addNeighbor(newTile->position.add(Vector2(0, 1)));
+                newTile->addNeighbor(newTile->position.add(Vector2::DOWN));
             }
 
             grid[x].push_back(newTile);
@@ -55,3 +50,7 @@ Tile* Tilemap::getTile(Vector2 position) {
 void Tilemap::setColor(Vector2 position, SDL_Color color) {
     grid[position.x][position.y]->setColor(color);
 }
+
+void Tilemap::generateMap() {
+
+};

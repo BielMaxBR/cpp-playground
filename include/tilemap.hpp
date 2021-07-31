@@ -16,4 +16,6 @@ class Tilemap {
         Tile* getTile(Vector2 position);
         
         void setColor(Vector2 position, SDL_Color color);
+
+        void generateMap();
 };
