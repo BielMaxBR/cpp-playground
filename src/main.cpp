@@ -15,8 +15,8 @@
 #include <constants.hpp>
 
 #define TILESIZE 12
-#define WIDTH 51
-#define HEIGHT 51
+#define WIDTH 5
+#define HEIGHT 5
 
 Window window;
 

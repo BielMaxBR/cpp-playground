@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <stdlib.h>
 #include <time.h>
+#include <cmath>
 
 #include <tile.hpp>
 #include <tilemap.hpp>
@@ -52,18 +53,49 @@ void Tilemap::setColor(Vector2 position, SDL_Color color) {
 }
 
 void Tilemap::generateMap() {
-    std::vector<Tile*> cells;
+    std::vector<std::vector<Tile*>> cells;
 
-    cells.reserve((grid.size()/3)*(grid[0].size()/3));
+    cells.reserve(round(grid.size()/2));
 
     for(size_t x = 0; x < grid.size(); x+=2) {
+        cells.push_back(std::vector<Tile*>());
+        cells[x].reserve(round(grid[x].size()/2));
+        
         for(size_t y = 0; y < grid[x].size(); y+=2) {
-        Tile* cell = getTile(x, y);
+            Tile* cell = getTile(x, y);
 
-        cells.push_back(cell);
-
-        cell->setColor(COLOR_NONE);
-        cell->type = TYPE_NONE;
+            cells[x].push_back(cell);
         }
     }
+
+    for(size_t x = 0; x < cells.size(); x++) {
+        SDL_Log("%lu",cells[x].size());
+        for(size_t y = 0; y < cells[x].size(); y++) {
+            SDL_Log("%f %f", cells[x][y]->position.x,cells[x][y]->position.y);
+
+            
+            cells[x][y]->type = TYPE_NONE;
+            cells[x][y]->setColor(COLOR_NONE);
+        }
+    }
+    Tile* current = cells[0][1];
+
+
+
+    std::vector<Tile*> neighborsCells;
+
+    // for(size_t i = 0; i < current->neighbors.size(); i++) {
+    //     Tile* neighborCell = cells[1][0];
+
+    //     if(neighborCell->type == TYPE_WALL) {
+    //         neighborsCells.push_back(neighborCell);
+    //         neighborCell->type = TYPE_NONE;
+    //         neighborCell->setColor(COLOR_NONE);
+    //     }
+    // }
+    // if(neighborsCells.size() > 0) {
+    //     int num = rand() % neighborsCells.size();
+    //     Tile* chosen = cells[neighborsCells[num]->position.x][neighborsCells[num]->position.y];
+
+    // }
 };
