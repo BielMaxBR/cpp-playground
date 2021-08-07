@@ -39,6 +39,21 @@ Vector2 Tile::getNeighbor(int index) {
     return neighbors[index];
 } 
 
+std::vector<Vector2> Tile::getAllNeighbors() {
+    return neighbors;
+}
+std::vector<Vector2> Tile::getAllNeighbors(Tile::callbackFunc callback) {
+    std::vector<Vector2> newNeighbors;
+
+    for(size_t i = 0; i < neighbors.size(); i++) {
+        if (callback(neighbors[i])) {
+            newNeighbors.push_back(neighbors[i]);
+        }
+    }
+
+    return neighbors;
+}
+
 double Tile::calcH(Vector2 finish) {
     H = position.distance(finish);
     return H;

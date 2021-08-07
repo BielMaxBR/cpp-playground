@@ -16,10 +16,12 @@ class Tile {
         Tile* parent;
         
     public: 
-        int type = TYPE_WALL;
         Vector2 position;    
-        std::vector<Vector2> neighbors;
+        int type = TYPE_WALL;
         SDL_Color color = COLOR_WALL;
+        std::vector<Vector2> neighbors;
+
+        typedef bool (*callbackFunc)(Vector2);
 
         Tile();
         Tile(Vector2 position_p);
@@ -33,6 +35,9 @@ class Tile {
 
         void addNeighbor(Vector2 neighbor);
         Vector2 getNeighbor(int index);
+
+        std::vector<Vector2> getAllNeighbors();
+        std::vector<Vector2> getAllNeighbors(Tile::callbackFunc callback);
 
         double calcH(Vector2 finish);
         double calcF();

@@ -59,43 +59,43 @@ void Tilemap::generateMap() {
 
     for(size_t x = 0; x < grid.size(); x+=2) {
         cells.push_back(std::vector<Tile*>());
-        cells[x].reserve(round(grid[x].size()/2));
+        cells[cells.size()-1].reserve(round(grid[x].size()/2));
         
         for(size_t y = 0; y < grid[x].size(); y+=2) {
             Tile* cell = getTile(x, y);
 
-            cells[x].push_back(cell);
+            cells[cells.size()-1].push_back(cell);
         }
     }
 
     for(size_t x = 0; x < cells.size(); x++) {
-        SDL_Log("%lu",cells[x].size());
-        for(size_t y = 0; y < cells[x].size(); y++) {
-            SDL_Log("%f %f", cells[x][y]->position.x,cells[x][y]->position.y);
 
-            
+        for(size_t y = 0; y < cells[x].size(); y++) {
+
             cells[x][y]->type = TYPE_NONE;
             cells[x][y]->setColor(COLOR_NONE);
         }
     }
-    Tile* current = cells[0][1];
+    Tile* current = cells[0][0];
 
+    std::vector<Vector2> neighborsCells;
 
+    bool callbackFunc(Vector2 neighborPosition) {
+        Tile* neighborCell = getTile(neighborPosition);
 
-    std::vector<Tile*> neighborsCells;
+        if(neighborCell->type == TYPE_WALL) {
+            neighborCell->type = TYPE_NONE;
+            neighborCell->setColor(COLOR_NONE);
+            return true;
+        }
+        return false;
+    }
 
-    // for(size_t i = 0; i < current->neighbors.size(); i++) {
-    //     Tile* neighborCell = cells[1][0];
+    neighborsCells = current->getAllNeighbors(callbackFunc);
+    
+    if(neighborsCells.size() > 0) {
+        int num = rand() % neighborsCells.size();
+        //Tile* chosen = cells[neighborsCells[num]->position.x][neighborsCells[num]->position.y];
 
-    //     if(neighborCell->type == TYPE_WALL) {
-    //         neighborsCells.push_back(neighborCell);
-    //         neighborCell->type = TYPE_NONE;
-    //         neighborCell->setColor(COLOR_NONE);
-    //     }
-    // }
-    // if(neighborsCells.size() > 0) {
-    //     int num = rand() % neighborsCells.size();
-    //     Tile* chosen = cells[neighborsCells[num]->position.x][neighborsCells[num]->position.y];
-
-    // }
+    }
 };
