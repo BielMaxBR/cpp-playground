@@ -21,8 +21,6 @@ class Tile {
         SDL_Color color = COLOR_WALL;
         std::vector<Vector2> neighbors;
 
-        typedef bool (*callbackFunc)(Vector2);
-
         Tile();
         Tile(Vector2 position_p);
         Tile(uint64_t x, uint64_t y);
@@ -37,7 +35,6 @@ class Tile {
         Vector2 getNeighbor(int index);
 
         std::vector<Vector2> getAllNeighbors();
-        std::vector<Vector2> getAllNeighbors(Tile::callbackFunc callback);
 
         double calcH(Vector2 finish);
         double calcF();

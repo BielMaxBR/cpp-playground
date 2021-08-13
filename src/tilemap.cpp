@@ -30,10 +30,10 @@ Tilemap::Tilemap(uint64_t width, uint64_t height) {
                 newTile->addNeighbor(newTile->position.add(Vector2::RIGHT));
             }
             if(y > 0) {
-                newTile->addNeighbor(newTile->position.add(Vector2::UP));
+                newTile->addNeighbor(newTile->position.add(Vector2::DOWN));
             }
             if(y < height-1) {
-                newTile->addNeighbor(newTile->position.add(Vector2::DOWN));
+                newTile->addNeighbor(newTile->position.add(Vector2::UP));
             }
 
             grid[x].push_back(newTile);
@@ -55,6 +55,8 @@ void Tilemap::setColor(Vector2 position, SDL_Color color) {
 void Tilemap::generateMap() {
     std::vector<std::vector<Tile*>> cells;
 
+    std::vector<Tile*> activeList;
+
     cells.reserve(round(grid.size()/2));
 
     for(size_t x = 0; x < grid.size(); x+=2) {
@@ -68,34 +70,24 @@ void Tilemap::generateMap() {
         }
     }
 
-    for(size_t x = 0; x < cells.size(); x++) {
-
-        for(size_t y = 0; y < cells[x].size(); y++) {
-
-            cells[x][y]->type = TYPE_NONE;
-            cells[x][y]->setColor(COLOR_NONE);
-        }
-    }
     Tile* current = cells[0][0];
-
-    std::vector<Vector2> neighborsCells;
-
-    bool callbackFunc(Vector2 neighborPosition) {
-        Tile* neighborCell = getTile(neighborPosition);
-
-        if(neighborCell->type == TYPE_WALL) {
-            neighborCell->type = TYPE_NONE;
-            neighborCell->setColor(COLOR_NONE);
-            return true;
-        }
-        return false;
-    }
-
-    neighborsCells = current->getAllNeighbors(callbackFunc);
+    current->setColor(COLOR_NONE);
+    current->type = TYPE_NONE;
     
-    if(neighborsCells.size() > 0) {
-        int num = rand() % neighborsCells.size();
-        //Tile* chosen = cells[neighborsCells[num]->position.x][neighborsCells[num]->position.y];
+    activeList.push_back(current);
+        
 
-    }
+    bool generating = true;
+    // loop
+    while (generating) {
+        std::vector<Tile*> avaliableNeighbors;
+
+        for(size_t i = 0; i < current->neighbors.size(); i++) {
+            Vector2 direction = current->position.sub(current->neighbors[i]);
+            Tile* cellNeighbor = cells[round(current->position.sub(direction).x/2)][round(current->position.sub(direction).y/2)];
+            cellNeighbor->setColor(COLOR_NONE);
+        }
+        generating = false;
+    }   
+
 };
