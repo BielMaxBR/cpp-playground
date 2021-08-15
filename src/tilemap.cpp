@@ -12,7 +12,6 @@
 #include <constants.hpp>
 
 Tilemap::Tilemap(uint64_t width, uint64_t height) {
-    srand(time(NULL));
 
     grid.reserve(width);
     for (size_t x = 0; x < width; x++) {
@@ -52,6 +51,20 @@ void Tilemap::setColor(Vector2 position, SDL_Color color) {
     grid[position.x][position.y]->setColor(color);
 }
 
+std::vector<Vector2> getAvaliableNeighbors(std::vector<std::vector<Tile*>> cells, Tile* cell) {
+    std::vector<Vector2> avaliableNeighbors;
+
+    for(size_t i = 0; i < cell->neighbors.size(); i++) {
+        Vector2 direction = cell->position.sub(cell->neighbors[i]);
+        Tile* cellNeighbor = cells[round(cell->position.sub(direction).x/2)][round(cell->position.sub(direction).y/2)];
+        if(cellNeighbor->type == TYPE_WALL) {
+            avaliableNeighbors.push_back(direction);
+        }
+    }
+
+    return avaliableNeighbors;
+}
+
 void Tilemap::generateMap() {
     std::vector<std::vector<Tile*>> cells;
 
@@ -80,14 +93,56 @@ void Tilemap::generateMap() {
     bool generating = true;
     // loop
     while (generating) {
-        std::vector<Tile*> avaliableNeighbors;
+        srand(time(NULL));
 
-        for(size_t i = 0; i < current->neighbors.size(); i++) {
-            Vector2 direction = current->position.sub(current->neighbors[i]);
-            Tile* cellNeighbor = cells[round(current->position.sub(direction).x/2)][round(current->position.sub(direction).y/2)];
-            cellNeighbor->setColor(COLOR_NONE);
+        std::vector<Vector2> avaliableNeighbors = getAvaliableNeighbors(cells, current);
+
+        SDL_Log("normal %lu",avaliableNeighbors.size());
+
+        if (avaliableNeighbors.size() > 0) {
+            int chosenNumber = rand() % avaliableNeighbors.size();
+
+            Tile* chosenCell = cells[round(current->position.sub(avaliableNeighbors[chosenNumber]).x/2)][round(current->position.sub(avaliableNeighbors[chosenNumber]).y/2)];
+            chosenCell->setColor(COLOR_NONE);
+            chosenCell->type = TYPE_NONE;
+
+            current = chosenCell;
+            activeList.push_back(chosenCell);
+
+            Tile* wallPosition = grid[current->position.sub(avaliableNeighbors[chosenNumber]).x][current->position.sub(avaliableNeighbors[chosenNumber]).y];
+            wallPosition->type = TYPE_NONE;
+            wallPosition->setColor(COLOR_NONE);
+        } else {
+            for(size_t i = 0; i < activeList.size(); i++) {
+                Tile* secondCurrent = activeList[i];
+                
+                std::vector<Vector2> secondAvaliableNeighbors = getAvaliableNeighbors(cells, secondCurrent);
+                
+                SDL_Log("segunda %lu",secondAvaliableNeighbors.size());
+                
+                if (secondAvaliableNeighbors.size() > 0) {
+                    int chosenNumber = rand() % secondAvaliableNeighbors.size();
+
+                    Tile* chosenCell = cells[round(secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).x/2)][round(secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).y/2)];
+                    chosenCell->setColor(COLOR_NONE);
+                    chosenCell->type = TYPE_NONE;
+
+                    activeList.push_back(chosenCell);
+                    current = chosenCell;
+
+                    Tile* wallPosition = grid[secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).x][secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).y];
+                    wallPosition->type = TYPE_NONE;
+                    wallPosition->setColor(COLOR_NONE);
+                    break;
+                } else {
+                    SDL_Log("acabou");
+                    generating = false;
+                    break;
+                }
+            }
         }
-        generating = false;
+
+        //generating = false;
     }   
 
 };
