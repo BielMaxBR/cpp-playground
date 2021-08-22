@@ -15,12 +15,13 @@
 #include <constants.hpp>
 
 #define TILESIZE 12
-#define WIDTH 50
-#define HEIGHT 50
+#define WIDTH 51
+#define HEIGHT 51
 
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
+
 Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
 
 bool gameRunning = true;
@@ -60,11 +61,11 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
-    window.create("SDL2 playground", 600, 600);
+    window.create("SDL2 playground", WIDTH*TILESIZE, WIDTH*TILESIZE);
     SDL_Log("janela criada");
 
-    srand(time(NULL));
 
+    tilemap.generateMap();
     finder.startFind();
     
     #ifdef __EMSCRIPTEN__

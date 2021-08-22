@@ -16,10 +16,10 @@ class Tile {
         Tile* parent;
         
     public: 
-        int type = TYPE_NONE;
         Vector2 position;    
+        int type = TYPE_WALL;
+        SDL_Color color = COLOR_WALL;
         std::vector<Vector2> neighbors;
-        SDL_Color color = {255, 255, 255, 255};
 
         Tile();
         Tile(Vector2 position_p);
@@ -33,6 +33,8 @@ class Tile {
 
         void addNeighbor(Vector2 neighbor);
         Vector2 getNeighbor(int index);
+
+        std::vector<Vector2> getAllNeighbors();
 
         double calcH(Vector2 finish);
         double calcF();

@@ -39,6 +39,10 @@ Vector2 Tile::getNeighbor(int index) {
     return neighbors[index];
 } 
 
+std::vector<Vector2> Tile::getAllNeighbors() {
+    return neighbors;
+}
+
 double Tile::calcH(Vector2 finish) {
     H = position.distance(finish);
     return H;
