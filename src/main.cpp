@@ -15,14 +15,14 @@
 #include <constants.hpp>
 
 #define TILESIZE 12
-#define WIDTH 50
-#define HEIGHT 50
+#define WIDTH 51
+#define HEIGHT 51
 
 Window window;
 
 Tilemap tilemap(WIDTH, HEIGHT);
 
-//Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
+Pathfinder finder(&tilemap, Vector2(0, 0), Vector2(WIDTH - 7, HEIGHT - 20));
 
 bool gameRunning = true;
 
@@ -37,9 +37,9 @@ void gameLoop() {
         }
     }
 
-    // if (finder.isRunning()) {
-    //     finder.update(&tilemap);
-    // }
+    if (finder.isRunning()) {
+        finder.update(&tilemap);
+    }
 
     window.clear();
 
@@ -64,8 +64,9 @@ int main(int argc, char * argv[]) {
     window.create("SDL2 playground", WIDTH*TILESIZE, WIDTH*TILESIZE);
     SDL_Log("janela criada");
 
+
     tilemap.generateMap();
-    //finder.startFind();
+    finder.startFind();
     
     #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(gameLoop, 0, 1);

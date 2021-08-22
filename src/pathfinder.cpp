@@ -10,15 +10,15 @@
 Pathfinder::Pathfinder(Tilemap* tilemap, Vector2 start_p, Vector2 end_p) {
     start = tilemap -> getTile(start_p);
     end = tilemap -> getTile(end_p);
+};
 
+void Pathfinder::startFind() {
     start-> setColor(COLOR_START);
     end-> setColor(COLOR_END);
 
     end->type = TYPE_NONE;
     start->type = TYPE_NONE;
-};
 
-void Pathfinder::startFind() {
     addOpen(start);
     running = true;
 };
