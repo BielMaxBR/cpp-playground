@@ -3,4 +3,7 @@
 # projeto atual
 
 - pathfinder (pronto)
-- gerador de labirinto (em andamento)
+- gerador de labirinto (pronto)
+
+
+[link do projeto atualmente](https://bielmaxbr.github.io/cpp-playground/)
