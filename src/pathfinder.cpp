@@ -122,7 +122,6 @@ void Pathfinder::update(Tilemap* tilemap) {
             
         }
     }
-    // running = false;
 };
 
 
