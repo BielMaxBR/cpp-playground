@@ -52,28 +52,14 @@ void Tilemap::setColor(Vector2 position, SDL_Color color) {
 }
 
 std::vector<Vector2> getAvaliableNeighbors(std::vector<std::vector<Tile*>> grid, Tile* cell) {
-    //SDL_Log("neighbors of: %f %f",cell->position.x,cell->position.y);
     std::vector<Vector2> avaliableNeighbors;
 
     for(size_t i = 0; i < cell->neighbors.size(); i++) {
         Vector2 direction = cell->position.sub(cell->neighbors[i]);
         Tile* cellNeighbor = grid[cell->position.sub(direction).sub(direction).x][cell->position.sub(direction).sub(direction).y];
-        //SDL_Log("%f %f type %i",cellNeighbor->position.x,cellNeighbor->position.y,cellNeighbor->type);
+
         if(cellNeighbor->type == TYPE_WALL) {
             avaliableNeighbors.push_back(direction);
-            //SDL_Log("is Wall: %lu", avaliableNeighbors.size());
-            // if(direction.compare(Vector2::UP)) {
-            //     SDL_Log("⬆️ %f %f",direction.x,direction.y);
-            // }
-            // if(direction.compare(Vector2::DOWN)) {
-            //     SDL_Log("⬇️ %f %f",direction.x,direction.y);
-            // }
-            // if(direction.compare(Vector2::RIGHT)) {
-            //     SDL_Log("➡️ %f %f",direction.x,direction.y);
-            // }
-            // if(direction.compare(Vector2::LEFT)) {
-            //     SDL_Log("⬅️ %f %f",direction.x,direction.y);
-            // }
         }
     }
     return avaliableNeighbors;
@@ -107,20 +93,15 @@ void Tilemap::generateMap() {
 
     bool generating = true;
 
-    int runningTest = 20;
-
     // loop
     while (generating) {
-        //SDL_Log("BEGIN LOOP");
         std::vector<Vector2> avaliableNeighbors = getAvaliableNeighbors(grid, current);
 
         if (avaliableNeighbors.size() > 0) {
-            //SDL_Log("first");
-            //SDL_Log("current %f %f",current->position.x,current->position.y);
             int chosenNumber = rand() % avaliableNeighbors.size();
 
             Tile* chosenCell = cells[round(current->position.x/2)-avaliableNeighbors[chosenNumber].x][round(current->position.y/2)-avaliableNeighbors[chosenNumber].y];
-            //SDL_Log("chosen id %i x %f y %f", chosenNumber, chosenCell->position.x,chosenCell->position.y);
+
             chosenCell->setColor(COLOR_NONE);
             chosenCell->type = TYPE_NONE;
 
@@ -128,32 +109,26 @@ void Tilemap::generateMap() {
             wall->type = TYPE_NONE;
             wall->setColor(COLOR_NONE);
 
-            //SDL_Log("wall %f %f",wall->position.x,wall->position.y);
-
             activeList.push_back(chosenCell);
             current = chosenCell;
         } else {
             size_t i = 0;
             while(i < activeList.size()) {
                 Tile* secondCurrent = activeList[i];
-                
-                //SDL_Log("activeList %lu",activeList.size());
 
                 std::vector<Vector2> secondAvaliableNeighbors = getAvaliableNeighbors(grid, secondCurrent);
-                //SDL_Log("second");
+
                 if (secondAvaliableNeighbors.size() > 0) {
                     int chosenNumber = rand() % secondAvaliableNeighbors.size();
 
                     Tile* chosenCell = cells[round(secondCurrent->position.x/2)-secondAvaliableNeighbors[chosenNumber].x][round(secondCurrent->position.y/2)-secondAvaliableNeighbors[chosenNumber].y];
-                    //SDL_Log("chosen id %i x %f y %f", chosenNumber, chosenCell->position.x,chosenCell->position.y);
+
                     chosenCell->setColor(COLOR_NONE);
                     chosenCell->type = TYPE_NONE;
 
                     Tile* wall = grid[secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).x][secondCurrent->position.sub(secondAvaliableNeighbors[chosenNumber]).y];
                     wall->type = TYPE_NONE;
                     wall->setColor(COLOR_NONE);
-
-                    //SDL_Log("wall %f %f",wall->position.x,wall->position.y);
 
                     activeList.push_back(chosenCell);
                     current = chosenCell;
@@ -168,8 +143,6 @@ void Tilemap::generateMap() {
             }
                 
         }
-        // runningTest--;
-        //SDL_Log("END LOOP \n \n");
     }   
 
 };
