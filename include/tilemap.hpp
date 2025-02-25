@@ -1,21 +1,31 @@
 #pragma once
 
-#include <vector>
-#include <cstdint>
 #include <SDL.h>
+#include <cstdint>
+#include <vector>
 
 #include <tile.hpp>
 
 class Tilemap {
-    public:
-        std::vector<std::vector<Tile*>> grid;
+private:
+  Tile *current;
+  std::vector<std::vector<Tile *>> cells;
 
-        Tilemap(uint64_t width, uint64_t height);
+  std::vector<Tile *> activeList;
 
-        Tile* getTile(uint64_t x, uint64_t y);
-        Tile* getTile(Vector2 position);
-        
-        void setColor(Vector2 position, SDL_Color color);
+public:
+  std::vector<std::vector<Tile *>> grid;
+  bool generating;
+  Tilemap(uint64_t width, uint64_t height);
 
-        void generateMap();
+  Tile *getTile(uint64_t x, uint64_t y);
+  Tile *getTile(Vector2 position);
+
+  void setColor(Vector2 position, SDL_Color color);
+
+  void generateMap();
+
+  void update();
+
+  bool isRunning();
 };

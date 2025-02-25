@@ -80,7 +80,7 @@ void Pathfinder::reconstructPath(Tile* tile) {
 };
 
 void Pathfinder::update(Tilemap* tilemap) {
-
+    end->setColor(COLOR_END);
     if(openList.size() == 0) {
         running = false;
         SDL_Log("caminho impossível");

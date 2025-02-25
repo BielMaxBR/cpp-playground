@@ -36,8 +36,10 @@ void gameLoop() {
         }
         }
     }
-
-    if (finder.isRunning()) {
+    if (tilemap.isRunning()) {
+        tilemap.update();
+    }
+    else if (finder.isRunning()) {
         finder.update(&tilemap);
     }
 
